@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notty"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="487" Width="328">
     <Grid>
-
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                <GradientStop Color="#F5F5F5" Offset="0.1" />
+                <GradientStop Color="#C4FFEB" Offset="0.95" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Margin="6" CornerRadius="4">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#F56155" Offset="0.2" />
+                    <GradientStop Color="#E5325F" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Label Content="NOTTY" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" FontFamily="Segoe UI Variable Small Semibold" FontStretch="UltraExpanded"/>
+        </Border>
+        <Border Grid.Row="1" Margin="15,-40,15,15" CornerRadius="5" Background="#F3F3F3" BorderThickness="1.5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#F56155" Offset="0.0" />
+                    <GradientStop Color="#D300D7" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Color="Black" Direction="-80" Opacity=".3"/>
+            </Border.Effect>
+            <Grid Margin="5" Background="Transparent">
+            </Grid>
+        </Border>
     </Grid>
 </Window>
