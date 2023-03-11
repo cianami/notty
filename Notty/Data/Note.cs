@@ -8,22 +8,43 @@ namespace Notty.Data
 {
     internal class Note
     {
+        private string title = null!;
+        private string content = null!;
 
-        public int ID { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public int ID { get; }
+        public string Title
+        { 
+            get => title;
+            set
+            {
+                title = value;
+                LastUpdateDate = DateTime.Now;  
+            }
+            
+        }
+        public string Content 
+        { 
+            get => content;
+            set
+            {
+                content = value;
+                LastUpdateDate = DateTime.Now;
+            }
+            
+        }
         public DateTime LastUpdateDate { get; set; }
 
-        public Note(int iD, string title, string content, DateTime lastUpdateDate):this(title, content, lastUpdateDate)
+        public Note(int iD, string title, string content, DateTime lastUpdateDate) : this(title, content)
         {
             ID = iD;
+            LastUpdateDate = lastUpdateDate;
         }
 
-        public Note(string title, string content, DateTime lastUpdateDate)
+        public Note(string title, string content)
         {
             Title = title;
             Content = content;
-            LastUpdateDate = lastUpdateDate;
+            LastUpdateDate = DateTime.Now;
         }
     }
 }
