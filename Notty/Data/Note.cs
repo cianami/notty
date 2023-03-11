@@ -46,5 +46,9 @@ namespace Notty.Data
             Content = content;
             LastUpdateDate = DateTime.Now;
         }
+        public override string ToString()
+        {
+            return Title + ": " + Content;
+        }
     }
 }
