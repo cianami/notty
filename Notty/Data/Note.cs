@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Notty.Data
 {
-    internal class Note
+    public class Note
     {
         private string title = null!;
         private string content = null!;

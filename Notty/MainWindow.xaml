@@ -3,9 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Notty"
+        xmlns:converters="clr-namespace:Notty.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="487" Width="328">
+        Title=" " Height="487" Width="328">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"  
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#4CD72E58" />
+                                <Setter TargetName="border" Property="CornerRadius" Value="4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -37,7 +58,58 @@
                 <DropShadowEffect BlurRadius="10" Color="Black" Direction="-80" Opacity=".3"/>
             </Border.Effect>
             <Grid Margin="5" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <ListBox  SelectionChanged="SelectedCard"  IsHitTestVisible="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Name="Cards" ItemsSource="{Binding Mode=OneWay}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,7">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="IsTabStop" Value="False" />
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Name="border"  
+                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border" Property="Background" Value="#2EDFA7B5" />
+                                                <Setter TargetName="border" Property="CornerRadius" Value="4"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border  CornerRadius="12" Background="#FFE4ED" Margin="8" >
+                                <Border.CommandBindings />
+                                <Grid Margin="10" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Content="{Binding Title}" Foreground="#FF1F1F1F" FontSize="15" FontFamily="Segoe UI Semibold" />
+                                    <Label Grid.Row="1" Content="{Binding Content}" Foreground="#FF656565" FontSize="13"/>
+                                    <Label Grid.Row="2" Content="{Binding LastUpdateDate, Converter={converters:DateConverter}}" Foreground="#FF9C9C9C" FontSize="9"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                        <Border Grid.Row="1" CornerRadius="4" Background="#82FF124E" BorderThickness="70,0,70,0">
+                    <Button Style="{StaticResource MyButtonStyle}" Content="Добавить" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Foreground="White" FontSize="15" FontFamily="Segoe UI Variable Small" FontStretch="UltraExpanded" BorderThickness="0" Click="AddNote"/>
+                </Border>
             </Grid>
         </Border>
     </Grid>
 </Window>
+    

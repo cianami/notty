@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Notty.Data;
+using Notty.Windows;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +27,22 @@ namespace Notty
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            Cards.ItemsSource = NoteDB.GetNoteList();
+        }
+
+        private void AddNote(object sender, RoutedEventArgs e)
+        {
+            NoteEditWindow noteEdit = new NoteEditWindow();
+            noteEdit.Show();
+        }
+
+        private void SelectedCard(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            Note selectedNote = (Note)listBox.SelectedItem;
+            NoteEditWindow noteEdit = new NoteEditWindow(selectedNote);
+            noteEdit.ShowDialog();
         }
     }
 }

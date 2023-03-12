@@ -20,10 +20,10 @@ namespace Notty.Data
             this.filePath = filePath;
         }
 
-        private string ConnectionString => "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath; 
+        private string ConnectionString => "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath;
 
 
-        public void Add(Note note) 
+        public void Add(Note note)
         {
             string query = "INSERT into Notes (content, [updated-at], title) VALUES ('" + note.Content + "', #" + ToSQLDateFormat(note.LastUpdateDate) + "#, '" + note.Title + "')";
             ExecuteDataManipulationQuery(query);
@@ -31,7 +31,7 @@ namespace Notty.Data
 
         public void Update(Note note)
         {
-            string query = "UPDATE Notes SET content = '" + note.Content + "', [updated-at] = #" + ToSQLDateFormat(note.LastUpdateDate) + "#, title = '" + note.Title+ "' WHERE id = " + note.ID + "";
+            string query = "UPDATE Notes SET content = '" + note.Content + "', [updated-at] = #" + ToSQLDateFormat(note.LastUpdateDate) + "#, title = '" + note.Title + "' WHERE id = " + note.ID + "";
             ExecuteDataManipulationQuery(query);
         }
 
@@ -41,7 +41,7 @@ namespace Notty.Data
             ExecuteDataManipulationQuery(query);
         }
 
-        private void ExecuteDataManipulationQuery(string query) 
+        private void ExecuteDataManipulationQuery(string query)
         {
             using var connection = new OleDbConnection(ConnectionString);
             connection.Open();
@@ -49,25 +49,35 @@ namespace Notty.Data
             command.ExecuteNonQuery();
         }
 
-        public List<Note> GetAll() 
+        public List<Note> GetAll()
         {
             List<Note> allNotes = new List<Note>();
             string query = "SELECT * FROM Notes";
             using var connection = new OleDbConnection(ConnectionString);
             connection.Open();
             var command = new OleDbCommand(query, connection);
-            using OleDbDataReader reader = command.ExecuteReader(); 
+            using OleDbDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Note note = new Note(reader.GetInt32(0), reader.GetString(3), reader.GetString(1), reader.GetDateTime(2));
-                allNotes.Add(note); 
+                allNotes.Add(note);
             }
             return allNotes;
         }
 
-        private static string ToSQLDateFormat(DateTime lastUpdateDate) 
+        private static string ToSQLDateFormat(DateTime lastUpdateDate)
         {
             return lastUpdateDate.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public static List<Note> GetNoteList()
+        {
+            return new List<Note> {
+                new Note("cpa","acl'msd;k"),
+                new Note("a;cvmv;a","a;dvnsl"), 
+                new Note("aS;CLMA","AKVMALDVK"), 
+                new Note("SLCM;AS","scmk")
+            };
         }
     }
 }
