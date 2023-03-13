@@ -62,7 +62,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <ListBox  SelectionChanged="SelectedCard"  IsHitTestVisible="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Name="Cards" ItemsSource="{Binding Mode=OneWay}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,7">
+                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="SelectedCard"  IsHitTestVisible="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Name="Cards" ItemsSource="{Binding Mode=OneWay}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,7">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -89,17 +89,17 @@
                     </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border  CornerRadius="12" Background="#FFE4ED" Margin="8" >
+                            <Border  CornerRadius="12" Background="#FFE4ED" Margin="7" >
                                 <Border.CommandBindings />
-                                <Grid Margin="10" >
+                                <Grid Margin="12" >
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition MinHeight="20" Height="Auto" />
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Label Grid.Row="0" Content="{Binding Title}" Foreground="#FF1F1F1F" FontSize="15" FontFamily="Segoe UI Semibold" />
-                                    <Label Grid.Row="1" Content="{Binding Content}" Foreground="#FF656565" FontSize="13"/>
-                                    <Label Grid.Row="2" Content="{Binding LastUpdateDate, Converter={converters:DateConverter}}" Foreground="#FF9C9C9C" FontSize="9"/>
+                                    <TextBlock Grid.Row="0" Text="{Binding Title}" TextWrapping="Wrap"  Foreground="#FF1F1F1F" FontSize="15" FontFamily="Segoe UI Semibold" />
+                                    <TextBlock Grid.Row="1" Text="{Binding Content}" TextWrapping="Wrap" Foreground="#FF656565" FontSize="13"/>
+                                    <Label Grid.Row="2" Padding="0,5,0,0" Content="{Binding LastUpdateDate, Converter={converters:DateConverter}}" Foreground="#FF9C9C9C" FontSize="9"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
