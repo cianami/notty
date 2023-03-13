@@ -18,7 +18,7 @@ namespace Notty.Converters
             if (value != null)
             {
                 DateTime test = (DateTime)value;
-                if (test.Date != DateTime.Now.Date) return test.ToString("HH:mm", culture);
+                if (test.Date == DateTime.Now.Date) return test.ToString("HH:mm", culture);
                 else return test.ToString("dd MMMM", culture);
             }
             return string.Empty;
